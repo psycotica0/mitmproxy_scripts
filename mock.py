@@ -9,17 +9,23 @@ else:
   from netlib.http import Headers
 
 def start(context, argv):
-  if len(argv) != 3:
-    raise ValueError("Must give a filter and a filename")
+  if len(argv) == 3:
+    context.content_type = "application/json"
+    context.filename = argv[2]
+  elif len(argv) == 4:
+    context.content_type = argv[2]
+    context.filename = argv[3]
+  else:
+    raise ValueError("Wrong format: filter [content-type] filename")
+
   context.filter = filt.parse(argv[1])
-  context.filename = argv[2]
 
 def request(context, flow):
   if flow.match(context.filter):
     if IVERSION[1] < 14:
-      headers = ODictCaseless([["Content-Type","application/json"]])
+      headers = ODictCaseless([["Content-Type", context.content_type]])
     else:
-      headers = Headers(Content_Type="application/json")
+      headers = Headers(Content_Type=context.content_type)
 
     with open(context.filename) as f:
       flow.reply(HTTPResponse(
