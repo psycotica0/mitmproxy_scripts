@@ -10,3 +10,5 @@ So that api.github.com/psycotica0/repos will only have one item which has a
 high stargazer's count.
 
 api.github.com/psycotica0/funnyname will return whatever's in test.response with hitting github's servers.
+
+jq.py requires jq.
