@@ -6,9 +6,9 @@ mitmproxy \
   -s 'jq.py /repos "[.[0] | .stargazers_count = 1000]"' \
   -s 'mock.py funnyname test.response'
 
-So that api.github.com/psycotica0/repos will only have one item which has a
+So that api.github.com/users/psycotica0/repos will only have one item which has a
 high stargazer's count.
 
-api.github.com/psycotica0/funnyname will return whatever's in test.response with hitting github's servers.
+api.github.com/users/psycotica0/funnyname will return whatever's in test.response with hitting github's servers.
 
 jq.py requires jq.
